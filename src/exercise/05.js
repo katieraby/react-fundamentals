@@ -4,35 +4,10 @@
 import * as React from 'react'
 import '../box-styles.css'
 
-// const smallBox = (
-//   <div
-//     className="box box--small"
-//     style={{backgroundColor: 'lightblue', fontStyle: 'italic'}}
-//   >
-//     small lightblue box
-//   </div>
-// )
-// const mediumBox = (
-//   <div
-//     className="box box--medium"
-//     style={{backgroundColor: 'pink', fontStyle: 'italic'}}
-//   >
-//     medium pink box
-//   </div>
-// )
-// const largeBox = (
-//   <div
-//     className="box box--large"
-//     style={{backgroundColor: 'orange', fontStyle: 'italic'}}
-//   >
-//     large orange box
-//   </div>
-// )
-
-const Box = ({className = '', style, ...otherProps}) => {
+const Box = ({size, style, ...otherProps}) => {
   return (
     <div
-      className={`box ${className}`}
+      className={`box box--${size}`}
       style={{fontStyle: 'italic', ...style}}
       {...otherProps}
     />
@@ -42,15 +17,16 @@ const Box = ({className = '', style, ...otherProps}) => {
 function App() {
   return (
     <div>
-      <Box className="box--small" style={{backgroundColor: 'lightblue'}}>
+      <Box size="small" style={{backgroundColor: 'lightblue'}}>
         Small lightblue box
       </Box>
-      <Box className="box--medium" style={{backgroundColor: 'pink'}}>
+      <Box size="medium" style={{backgroundColor: 'pink'}}>
         Medium pink box
       </Box>
-      <Box className="box--large" style={{backgroundColor: 'orange'}}>
+      <Box size="large" style={{backgroundColor: 'orange'}}>
         Large orange box
       </Box>
+      <Box>sizeless box</Box>
     </div>
   )
 }
