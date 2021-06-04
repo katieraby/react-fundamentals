@@ -2,28 +2,36 @@
 // http://localhost:3000/isolated/exercise/06.js
 
 import * as React from 'react'
+import {useRef, useState} from 'react'
 
 function UsernameForm({onSubmitUsername}) {
-  const handleSubmit = event => {
-    event.preventDefault()
+  // practising using refs to access value in some cases
+  const usernameInput = useRef(null); 
+  // const [error, setError] = useState(null);
+  const [username, setUsername] = useState('');
+  
+  const handleChange = (event) => {
+    const val = event.target.value;
+    setUsername(val.toLowerCase());
+    // const isValid = val === val.toLowerCase();
+    // setError(isValid ? null : 'Username must be lowercase');
+  }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmitUsername(usernameInput.current.value)
   }
 
-  // 🐨 get the value from the username input (using whichever method
-  // you prefer from the options mentioned in the instructions)
-  // 💰 For example: event.target.elements[0].value
-  // 🐨 Call `onSubmitUsername` with the value of the input
 
-  // 🐨 add the onSubmit handler to the <form> below
-
-  // 🐨 make sure to associate the label to the input.
-  // to do so, set the value of 'htmlFor' prop of the label to the id of input
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label>Username:</label>
-        <input type="text" />
+        <label htmlFor="username">Username:</label>
+        <input ref={usernameInput} type="text" id="username" onChange={handleChange} value={username} />
       </div>
-      <button type="submit">Submit</button>
+      {/* <div style={{color: 'red'}} role="alert">{error}</div> */}
+      <button type="submit" >Submit</button>
+      {/* disabled={Boolean(error)} to ensure absolutely passing boolean to the disabled */}
     </form>
   )
 }
